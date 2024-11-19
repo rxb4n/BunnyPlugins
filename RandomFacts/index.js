@@ -1,6 +1,3 @@
-import { registerCommand } from "@vendetta/commands"
-import { findByProps } from "@vendetta/metro"
-
 const MessageActions = findByProps("sendMessage", "receiveMessage")
 
 let commands = [
