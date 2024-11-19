@@ -1,70 +1,47 @@
 import { registerCommand } from "@vendetta/commands"
 
-let dogFactCommand = [
+
+let factCommand = [
 ]
 
-let catFactCommand = [
-]
-
-let uselessFactCommand = [
-]
-
-const uselessFact = async function () {
-    const response = await fetch(`https://uselessfacts.jsph.pl/api/v2/facts/random`);
-    const resp = await response.json();
-    return resp['text']
-}
-
-const dogFact = async function () {
-    const response = await fetch(`https://dogapi.dog/api/v2/facts?limit=1`);
-    const resp = await response.json();
-    return resp['data']['0']['attributes']['body']
-}
-
-const catFact = async function () {
-    const response = await fetch(`https://catfact.ninja/fact`);
-    const resp = await response.json();
-    return resp["fact"]
+const fact = async function () {
+    let sentences = ["Ah shucks... you guys are the best!", 
+        "C'mon, Mom! One more game before you tuck me in. Oops mistell.",
+        "Mommy says people my age shouldn't suck their thumbs.",
+        "I'm wrestling with some insecurity issues in my life but thank you all for playing with me.",
+        "I'm trying to be a nicer person. It's hard, but I am trying, guys.",
+        "I feel very, very small... please hold me...",
+        "Great game, everyone!",
+        "It was an honor to play with you all. Thank you.",
+        "Wishing you all the best.",
+        "Good game! Best of luck to you all!",
+        "Gee whiz! That was fun. Good playing!",
+        "Well played. I salute you all.",
+        "It's past my bedtime. Please don't tell my mommy.",
+        "I could really use a hug right now.",
+        "For glory and honor! Huzzah comrades!",
+        "You guys made me climax! Thank you."];
+        
+    const length = sentences.length;
+    let picker = Math.floor(Math.random() * length);
+    const result = sentences[picker];
+    return result;
 }
 
 export const onLoad = () => {
-    catFactCommand = registerCommand({
-        name: "catfact",
-        displayName: "catfact",
-        description: "Sends a random cat fact.",
-        displayDescription: "Sends a random cat fact.",
-        applicationId: '-1',
+    factCommand = registerCommand({
+        name: "ggez",
+        displayName: "ggez",
+        description: "Sends a ggez fact.",
+        displayDescription: "Sends a ggez fact.",
+        applicationId: -1,
         inputType: 1,
         type: 1,
 
-        execute: async () => { return { content: await catFact() }}
-    });
-    dogFactCommand = registerCommand({
-        name: "dogfact",
-        displayName: "dogfact",
-        description: "Sends a dog fact.",
-        displayDescription: "Sends a dot fact.",
-        applicationId: '-1',
-        inputType: 1,
-        type: 1,
-
-        execute: async () => { return { content: await dogFact() }}
-    });
-    uselessFactCommand = registerCommand({
-        name: "useless",
-        displayName: "useless",
-        description: "Sends a useless fact.",
-        displayDescription: "Sends a useless fact.",
-        applicationId: '-1',
-        inputType: 1,
-        type: 1,
-
-        execute: async () => { return { content: await uselessFact() }}
+        execute: async () => { return { content: await fact() }}
     });
 }
 
 export const onUnload = () => {
-    catFactCommand();
-    dogFactCommand();
-    uselessFactCommand();
+    factCommand();
 }
